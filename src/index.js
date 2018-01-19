@@ -7,6 +7,7 @@ const { InMemoryCache } = require('apollo-cache-inmemory')
 const {
     appLs,
     instanceLs,
+    instanceStart,
 } = require('./commands')
 
 const tableStyle = {
@@ -29,6 +30,8 @@ vorpal.command('app ls', 'List Applications')
     .action(appLs({apolloClient, tableStyle}))
 vorpal.command('instance ls', 'List Instances')
     .action(instanceLs({ apolloClient, tableStyle }))
+vorpal.command('instance start <name> <app>', 'Create a new Instance based on an App')
+    .action(instanceStart({ apolloClient, tableStyle }))
 
 if(process.argv.length > 2){
     // non interactive
