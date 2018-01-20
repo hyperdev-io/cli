@@ -19,4 +19,10 @@ module.exports = {
             }
         }
     `,
+    removeApp: gql`
+        mutation removeApp(
+            $name: String!,
+            $version: String!
+        ) {removeApp(name:$name, version:$version)}
+    `,
 }
