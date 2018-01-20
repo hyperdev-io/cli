@@ -12,5 +12,6 @@ module.exports = (uri) => {
     return {
         instances: require('./instances')(apolloClient),
         apps: require('./apps')(apolloClient),
+        buckets: require('./buckets')(apolloClient),
     }
 }

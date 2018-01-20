@@ -13,12 +13,13 @@ const tableStyle = {
 const commands = [
     './commands/app',
     './commands/instance',
+    './commands/bucket',
 ]
 
 vorpal = Vorpal()
 
 if(!process.env.BIGBOAT_API){
-    vorpal.log('please provide env BIGBOAT_API')
+    vorpal.log('Environment variable BIGBOAT_API not set.')
     process.exit(1)
 }
 
@@ -32,6 +33,7 @@ if(process.argv.length > 2){
     vorpal.exec(process.argv.slice(2).join(' '));
 } else {
     // interactive
+    vorpal.log(`Connected to ${process.env.BIGBOAT_API}`)
     vorpal.delimiter('BigBoat CLI />')
     vorpal.show().parse(process.argv);
 }

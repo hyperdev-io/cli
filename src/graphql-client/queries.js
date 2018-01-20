@@ -33,4 +33,11 @@ module.exports = {
             }
         }}
     `,
+    bucketsQuery: gql`
+        {buckets {
+            id
+            name
+            isLocked
+        }}
+    `,
 }

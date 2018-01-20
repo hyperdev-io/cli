@@ -25,4 +25,16 @@ module.exports = {
             $version: String!
         ) {removeApp(name:$name, version:$version)}
     `,
+    deleteBucket: gql`
+        mutation deleteBucket($name: String!){
+            deleteBucket(name: $name)
+        }
+    `,
+    copyBucket: gql`
+        mutation copyBucket($sourceName: String!, $destinationName: String!){
+            copyBucket(sourceName: $sourceName, destinationName: $destinationName) {
+                id, name, isLocked
+            }
+        }
+    `,
 }
