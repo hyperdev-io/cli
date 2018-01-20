@@ -12,4 +12,11 @@ module.exports = {
             id
         }}
     `,
+    stopInstance: gql`
+        mutation stopInstance($name: String!){
+            stopInstance(name: $name) {
+                id, name
+            }
+        }
+    `,
 }

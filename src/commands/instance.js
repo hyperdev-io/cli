@@ -18,7 +18,7 @@ module.exports = ({ client, tableStyle }) => (vorpal, options) => {
             this.log(table.toString())
             callback()
         }).catch(error => {
-            this.log(error)
+            this.log(error.graphQLErrors[0].message)
             callback()
         })
     })
@@ -29,12 +29,17 @@ module.exports = ({ client, tableStyle }) => (vorpal, options) => {
             this.log(instance.id)
             callback()
         }).catch(error => {
-            this.log(error)
+            this.log(error.graphQLErrors[0].message)
             callback()
         });
     })
-    vorpal.command('instance stop <name>', 'Stop a running instance').action(function(args, cb){
-        this.log('.....')
-        cb()
+    vorpal.command('instance stop <name>', 'Stop a running instance').action(function (args, callback){
+        client.instances.stop(args.name).then(instance => {
+            this.log(instance.id)
+            callback()
+        }).catch(error => {
+            this.log(error.graphQLErrors[0].message)
+            callback()
+        });
     })
 }
