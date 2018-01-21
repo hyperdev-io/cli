@@ -17,7 +17,7 @@ if(!process.env.BIGBOAT_API){
     process.exit(1)
 }
 
-const client = require('./graphql-client')(process.env.BIGBOAT_API)
+const client = require('@bigboat/server-client')(process.env.BIGBOAT_API)
 vorpal.use(require('./commands/app')({ client, tableStyle }))
 vorpal.use(require('./commands/instance')({ client, tableStyle }))
 vorpal.use(require('./commands/bucket')({ client, tableStyle }))
