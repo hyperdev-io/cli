@@ -10,12 +10,6 @@ const tableStyle = {
     style: { 'padding-left': 0, 'padding-right': 5, head: [] }
 }
 
-const commands = [
-    './commands/app',
-    './commands/instance',
-    './commands/bucket',
-]
-
 vorpal = Vorpal()
 
 if(!process.env.BIGBOAT_API){
@@ -24,9 +18,9 @@ if(!process.env.BIGBOAT_API){
 }
 
 const client = require('./graphql-client')(process.env.BIGBOAT_API)
-for(command of commands){
-    vorpal.use(require(command)({ client, tableStyle }))
-}
+vorpal.use(require('./commands/app')({ client, tableStyle }))
+vorpal.use(require('./commands/instance')({ client, tableStyle }))
+vorpal.use(require('./commands/bucket')({ client, tableStyle }))
 
 if(process.argv.length > 2){
     // non interactive
