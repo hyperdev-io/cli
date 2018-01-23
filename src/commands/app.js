@@ -66,7 +66,7 @@ module.exports = ({ client, tableStyle }) => (vorpal, options) => {
             fs.readFileSync(bigboatComposeFile, { encoding: "utf8" })
           )
           .then(app => {
-            this.log(app);
+            this.log(app.id);
             callback();
           })
           .catch(error => {
