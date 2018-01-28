@@ -1,38 +1,13 @@
 #!/usr/bin/env node
-const Vorpal = require("vorpal");
-
-const tableStyle = {
-  chars: {
-    top: "",
-    "top-mid": "",
-    "top-left": "",
-    "top-right": "",
-    bottom: "",
-    "bottom-mid": "",
-    "bottom-left": "",
-    "bottom-right": "",
-    left: "",
-    "left-mid": "",
-    mid: "",
-    "mid-mid": "",
-    right: "",
-    "right-mid": "",
-    middle: " "
-  },
-  style: { "padding-left": 0, "padding-right": 5, head: [] }
-};
-
-vorpal = Vorpal();
 
 if (!process.env.BIGBOAT_API) {
-  vorpal.log("Environment variable BIGBOAT_API not set.");
+  console.log("Environment variable BIGBOAT_API not set.");
   process.exit(1);
 }
 
-const client = require("@bigboat/server-client")(process.env.BIGBOAT_API);
-vorpal.use(require("./commands/app")({ client, tableStyle }));
-vorpal.use(require("./commands/instance")({ client, tableStyle }));
-vorpal.use(require("./commands/bucket")({ client, tableStyle }));
+const client = require("@bigboat/server-client").client(process.env.BIGBOAT_API);
+const BigBoatVorpal = require('./bigboat-vorpal')
+const vorpal = BigBoatVorpal(client);
 
 if (process.argv.length > 2) {
   // non interactive
