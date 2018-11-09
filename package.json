@@ -1,10 +1,10 @@
 {
   "name": "@hyperdev-io/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A command line interface for HyperDev",
   "main": "src/hyperdev-vorpal.js",
   "bin": {
-    "bigboat": "src/cli.js"
+    "hyperdev": "src/cli.js"
   },
   "dependencies": {
     "@hyperdev-io/graphql-api-client": "^2.5.2",
