@@ -1,8 +1,8 @@
 {
-  "name": "@hyperdev/cli",
+  "name": "@hyperdev-io/cli",
   "version": "1.0.0",
   "description": "A command line interface for HyperDev",
-  "main": "src/bigboat-vorpal.js",
+  "main": "src/hyperdev-vorpal.js",
   "bin": {
     "bigboat": "src/cli.js"
   },
