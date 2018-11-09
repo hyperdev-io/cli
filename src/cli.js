@@ -1,12 +1,22 @@
 #!/usr/bin/env node
 
-if (!process.env.BIGBOAT_API) {
-  console.log("Environment variable BIGBOAT_API not set.");
+if (!process.env.HYPERDEV_HOST) {
+  console.log("Environment variable HYPERDEV_HOST not set.");
+  process.exit(1);
+}
+if (!process.env.HYPERDEV_TOKEN) {
+  console.log("Environment variable HYPERDEV_TOKEN not set.");
   process.exit(1);
 }
 
-const client = require("@bigboat/server-client").client(process.env.BIGBOAT_API);
-const BigBoatVorpal = require('./bigboat-vorpal')
+const hyperdevHost = process.env.HYPERDEV_HOST;
+const token = process.env.HYPERDEV_TOKEN;
+
+
+const client = require("@hyperdev-io/graphql-api-client").client(hyperdevHost, {
+  token
+});
+const BigBoatVorpal = require('./hyperdev-vorpal')
 const vorpal = BigBoatVorpal(client);
 
 if (process.argv.length > 2) {
@@ -14,7 +24,7 @@ if (process.argv.length > 2) {
   vorpal.exec(process.argv.slice(2).join(" "));
 } else {
   // interactive
-  vorpal.log(`Connected to ${process.env.BIGBOAT_API}`);
-  vorpal.delimiter("BigBoat CLI />");
+  vorpal.log(`Connected to ${hyperdevHost}`);
+  vorpal.delimiter("HyperDev /> ");
   vorpal.show().parse(process.argv);
 }
